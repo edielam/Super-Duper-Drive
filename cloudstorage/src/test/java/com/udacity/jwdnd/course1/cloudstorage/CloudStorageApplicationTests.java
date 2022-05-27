@@ -71,7 +71,7 @@ class CloudStorageApplicationTests {
 	}
 
 	@AfterAll
-	 public static void afterAll() {
+	public static void afterAll() {
 		if (driver != null) {
 			driver.quit();
 		}
@@ -108,14 +108,14 @@ class CloudStorageApplicationTests {
 		sleep(2000);
 
 		driver.get(baseUrl+"/home");
-        Assertions.assertNotEquals("Home",driver.getTitle());
+		Assertions.assertNotEquals("Home",driver.getTitle());
 	}
 
 	@Test
 	@Order(2)
-    //Write a test that signs up a new user, logs in, verifies that the home page is accessible,
+	//Write a test that signs up a new user, logs in, verifies that the home page is accessible,
 	// logs out, and verifies that the home page is no longer accessible
-    public void b_signupSuccess() throws InterruptedException {
+	public void b_signupSuccess() throws InterruptedException {
 		logger.error("test 2 -signup");
 		driver.get(baseUrl + "/signup");
 		SignupPage signupPage = new SignupPage(driver);
@@ -126,10 +126,10 @@ class CloudStorageApplicationTests {
 		sleep(4000);
 		assertEquals("Login", driver.getTitle());
 		//driver.findElement(By.id("signup-success-msg"));
-		 //driver.get(baseUrl + "/login");
+		//driver.get(baseUrl + "/login");
 		//LoginPage loginPage=new LoginPage(driver);
 		//sleep(5000);
-        //Assertions.assertTrue(driver..sigupOkMsgDisplayed());
+		//Assertions.assertTrue(driver..sigupOkMsgDisplayed());
 		//Assertions.assertTrue(signupPage.sigupOkMsgDisplayed());
 	}
 
@@ -139,9 +139,9 @@ class CloudStorageApplicationTests {
 	@Order(3)
 	public void c_loginSuccess() throws Exception{
 		logger.error("test 3 -login-logout-login again");
-        driver.get(baseUrl + "/login");
-        LoginPage loginPage=new LoginPage(driver);
-        loginPage.LoginNow(uname,pword);
+		driver.get(baseUrl + "/login");
+		LoginPage loginPage=new LoginPage(driver);
+		loginPage.LoginNow(uname,pword);
 		sleep(1000);
 		//Assert page redirected to home so login is successful
 		Assertions.assertEquals("Home",driver.getTitle());
@@ -195,7 +195,7 @@ class CloudStorageApplicationTests {
 		sleep(2000);
 		waitForVisibility(notePage.getNoteTabId());
 		notePage.clickNoteTab();
-        //verify new note is added and displayed as expected
+		//verify new note is added and displayed as expected
 		Assertions.assertEquals(notePage.getNoteTitleDisplay(),noteTitle_org);
 		Assertions.assertEquals(notePage.getNoteDesDisplay(),noteDes_org);
 
@@ -272,17 +272,17 @@ class CloudStorageApplicationTests {
 		//verify the displayed credentials are expected and their passwds are encrypted
 		//encryptionService = new EncryptionService();
 		for(int pos=0;pos<total;pos++){
-           String displayedUrl=credentialPage.getUrl(pos);
-           String displayedUname=credentialPage.getUname(pos);
+			String displayedUrl=credentialPage.getUrl(pos);
+			String displayedUname=credentialPage.getUname(pos);
 
-           String displayedPwd = credentialPage.getPw(pos);
-           //decrypt pwd
+			String displayedPwd = credentialPage.getPw(pos);
+			//decrypt pwd
 			String key=credentialService.getKeyById(pos+1);
 			displayedPwd= encryptionService.decryptValue(displayedPwd,key);
 
 			Assertions.assertEquals(displayedUrl,urls[pos]);
 			Assertions.assertEquals(displayedUname,unames[pos]);
-            Assertions.assertEquals(displayedPwd,pws[pos]);
+			Assertions.assertEquals(displayedPwd,pws[pos]);
 		}
 
 
@@ -307,7 +307,7 @@ class CloudStorageApplicationTests {
 			sleep(3000);
 		}
 
-         //go back to Credential tab
+		//go back to Credential tab
 		waitForVisibility(credentialPage.getCrenTabId());
 		credentialPage.clickCrenTab();
 		sleep(1000);
@@ -332,7 +332,7 @@ class CloudStorageApplicationTests {
 			credentialPage.clickCrenTab();
 			sleep(1000);
 
-            //note after each deletion, the next one we want to delete is always at position 0
+			//note after each deletion, the next one we want to delete is always at position 0
 			credentialPage.clickDeleteCredBtn(0);
 			sleep(3000);
 		}
@@ -346,4 +346,5 @@ class CloudStorageApplicationTests {
 
 
 	}
+
 }
